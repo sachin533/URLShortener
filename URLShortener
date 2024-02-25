@@ -1,0 +1,33 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class URLShortener {
+    private Map<String, String> shortToLongMap;
+    private Map<String, String> longToShortMap;
+    private int counter;
+
+    public URLShortener() {
+        shortToLongMap = new HashMap<>();
+        longToShortMap = new HashMap<>();
+        counter = 0;
+    }
+
+    public String shorten(String longURL) {
+        String shortURL = "short.ly/" + counter++;
+        shortToLongMap.put(shortURL, longURL);
+        longToShortMap.put(longURL, shortURL);
+        return shortURL;
+    }
+
+    public String expand(String shortURL) {
+        return shortToLongMap.get(shortURL);
+    }
+
+    public static void main(String[] args) {
+        URLShortener urlShortener = new URLShortener();
+        String longURL = "https://www.example.com/very/long/url/to/shorten";
+        String shortURL = urlShortener.shorten(longURL);
+        System.out.println("Shortened URL: " + shortURL);
+        System.out.println("Expanded URL: " + urlShortener.expand(shortURL));
+    }
+}
